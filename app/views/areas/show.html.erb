@@ -1,0 +1,72 @@
+<p id="notice">
+	<%= notice %>
+</p>
+
+<h1><%= @area.name %></h1>
+<script>
+	var area_id = <%= @area.id %>;
+	var poi_id = -1;
+</script>
+<div id="areas_prop_table">
+	<table>
+		<tr>
+			<th>AR Type</th>
+			<th>AR Subtype</th>
+			<th>Feature description alignment</th>
+			<th>Max objects to detect per frame</th>
+			<th>Max objects to track in parallel</th>
+			<th>Similarity threshold</th>
+		</tr>
+		<tr>
+			<td><%= @area.ar_type %></td>
+			<td><%= @area.ar_subtype %></td>
+			<td><%= @area.feature_description_alignment %></td>
+			<td><%= @area.max_objects_to_detect_per_frame %></td>
+			<td><%= @area.max_objects_to_track_in_parallel %></td>
+			<td><%= @area.similarity_threshold %></td>
+		</tr>
+	</table>
+</div>
+
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<div id="map_div">
+	<div id="map"></div>
+</div>
+
+<div id="pois_list">
+	<p id="feedback">
+		<span>You've selected:</span><span id="select-result">none</span>.
+	</p>
+
+	<ol id="selectable">
+		<% @area.pois.each do |poi| %>
+			<li class="ui-widget-content" data-visage-edit-poi=<%= poi.id%>>
+				<%= poi.name %>
+			</li>
+		<% end %>
+	</ol>
+	
+	<a id="edit_poi_link" href="#" class="navigation" data-visage-edit-poi-link=<%= edit_area_poi_path(@area,0) %> >
+		Edit Poi
+	</a>
+	<br />
+	<%= link_to 'New Poi', new_area_poi_path(@area),  :class => "navigation" %>
+</div>
+
+<div style="clear:both;"></div>
+
+<%= link_to 'Edit', edit_area_path(@area), :class => "navigation" %>
+<%= link_to 'Back', areas_path, :class => "navigation" %>
+
+<script>
+var ready;
+ready = function() {
+	if(_(document.URL.split('/')).last() != "<%= @area.id %>")
+		return;
+	AreaMap.load_map();
+}
+	
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
+</script>

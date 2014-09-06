@@ -1,0 +1,71 @@
+#areas_table, #areas_prop_table {
+  td,th {
+    padding: 4px;
+  };
+  
+  .tddel {
+    width: 100%;
+  }
+}
+
+#areas_prop_table {
+  display: none;
+}
+
+#selectable {
+  
+   list-style-type: none; margin: 0; padding: 0; width: 100px;
+   
+   .ui-selecting { 
+     background: #FECA40;
+     }
+   
+   .ui-selected {
+     background: #F39814; color: white;
+     }
+     
+}
+
+#pois_list {
+  float: left;
+}
+
+#map_div {
+  width: 800px;
+  height: 400px;
+  float: left;
+}
+
+#map {
+  width: 800px;
+  height: 400px;
+  float: left;
+}
+
+#pac-input {
+  background-color: #fff;
+  padding: 0 11px 0 13px;
+  width: 400px;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+  margin-left: -1px;
+  padding-left: 14px;
+  width: 401px;
+}
+
+.controls {
+  margin-top: 16px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}

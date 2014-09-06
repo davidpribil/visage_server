@@ -1,0 +1,152 @@
+<h1>Editing poi</h1>
+
+<div id="dialog_new_era" class="vdialog" title="New Era">
+  <form>
+    <fieldset class="ui-helper-reset">
+      <label for="tab_title">Year</label>
+      <input type="text" name="tab_title" id="tab_title" value="Year" class="ui-widget-content ui-corner-all">
+    </fieldset>
+  </form>
+</div>
+
+<div id="dialog_set_marker" class="vdialog" title="Set marker image">
+  <%= form_for [@area, @poi] do |f| %>
+	  <% if @poi.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@poi.errors.count, "error") %> prohibited this poi from being saved:</h2>
+	
+	      <ul>
+	      <% @poi.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	  
+	  <div class="field">
+	    <%= f.label :marker_image %><br>
+	    <%= f.file_field :marker_image %>
+	  </div>
+	
+	  <div class="actions">
+	    <%= f.submit %>
+	  </div>
+	<% end %>
+</div>
+ 
+<button id="add_tab">Add new Era</button>
+<br />
+
+<div id="tabs">
+  <ul>
+    
+  </ul>
+</div>
+<div id="droppable">
+	<% if @poi.marker_image %>
+		<script>
+		$("#droppable")
+		.css( "background-image", "url(data:image/jpg;base64,<%= Base64.strict_encode64(@poi.marker_image).html_safe %>)")
+		.css("background-repeat", "no-repeat")
+		.css("background-size", "contain").
+		css("background-position", "center");
+		</script>
+	<% else %>
+		<button id="set_marker">
+			Set Locator Image
+		</button>
+	<% end %>
+</div>
+<div id="right_menu_bar">
+	<%= link_to "Upload image", new_area_poi_poi_data_path(@area, @poi, :poi_data_type => "texture2D"), {:method => "get"} %>
+	<br />
+	<%= link_to "Upload audio", new_area_poi_poi_data_path(@area, @poi, :poi_data_type => "audio"), {:method => "get"} %>
+
+	<div id="assets">
+		<h2><a href="#">Images</a></h2>
+		<div>
+			<ul>
+			<% if @poi.poi_datas && !@poi.poi_datas.find_all() {|d| d.texture2D?}.empty? %>
+				<% @poi.poi_datas.find_all() {|d| d.texture2D?}.each do |poi_data| %>
+					<li>
+						<div class="image_dnd draggable" poi_data_id="<%= poi_data.id %>">
+							<img class="poi_data_image" src="data:image/jpg;base64,<%= Base64.strict_encode64(poi_data.file).html_safe %>">
+						</div>
+						<div><%= poi_data.description %></div>
+					</li>	
+				<% end %>
+			<% else %>
+					<li class="placeholder">
+						No images available, use the upload images button
+					</li>
+			<% end %>
+			</ul>
+		</div>
+		<h2><a href="#">Audio</a></h2>
+		<div>
+			<ul>
+				<% if @poi.poi_datas && !@poi.poi_datas.find_all() {|d| d.audio?}.empty? %>
+					<% @poi.poi_datas.find_all() {|d| d.audio?}.each do |poi_data| %>
+						<li>
+							<div><%= poi_data.description %></div>
+							<div class="transparent button_wrapper draggable" poi_data_id="<%= poi_data.id %>">
+								<button class="audio_dnd ui-widget-content" source_id='audio_source_<%= poi_data.id%>'>play</button>
+							</div>
+							<audio id='audio_source_<%= poi_data.id%>' src="data:audio/ogg;base64,<%= Base64.strict_encode64(poi_data.file).html_safe %>">
+						</li>	
+					<% end %>
+				<% else %>
+						<li class="placeholder">
+							No audio available, use the upload images button
+						</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="dragTextDiv" class="draggable" poi_data_id="<%= @poi.poi_datas.text.first.id %>">
+	    <textarea name="dragText" id="dragText">Drop new text</textarea>
+	</div>
+
+</div>
+
+<div style="clear:both;"></div>
+
+<%= render 'form'%>
+
+<%= link_to 'Back', @area, :class => "navigation" %>
+<%= link_to 'Delete POI', area_poi_path(@area, @poi), :class => "delete_button" , method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<!-- Add pre-defined tabs and elements -->
+<script>
+var ready;
+
+ready = function() {
+	console.log("document ready called");
+	console.log(document);
+	
+	if($('#droppable').length <= 0)
+		return;
+		
+	if(_(_(document.URL.split('/')).last(2)).first() != "<%= @poi.id %>")
+		return;
+		
+	<% if @poi.tab_data %>
+		var tabData = <%= @poi.tab_data.html_safe %>;
+		_.each(tabData, function(tab){
+			addTab(tab.name, tab.id);
+		});
+	<% end %>
+	<% @poi.poi_data_locations.each do |d| %>
+		<% if ['text','texture2D','audio'].include? PoiData.find(d.poi_data_id).data_type %>
+			var pos = <%= d.position %>;
+			var scale = <%= d.scale %>;
+			addNewElement($(':not([clone])[poi_data_id=<%= d.poi_data_id %>]').clone().attr("id",""),
+			pos[0],pos[1],scale[0],scale[1], <%= d.id%>, <%= d.tab_id %>, "<%= d.source %>");
+		<% end %>
+	<% end %>
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+</script>

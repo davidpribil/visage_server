@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ar_target.name %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @ar_target.image_url %>
+</p>
+
+<p>
+  <strong>Data url:</strong>
+  <%= @ar_target.data_url %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ar_target.description %>
+</p>
+
+<%= link_to 'Edit', edit_ar_target_path(@ar_target) %> |
+<%= link_to 'Back', ar_targets_path %>

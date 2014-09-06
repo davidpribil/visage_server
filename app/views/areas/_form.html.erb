@@ -1,0 +1,52 @@
+<%= form_for(@area) do |f| %>
+  <% if @area.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@area.errors.count, "error") %> prohibited this area from being saved:</h2>
+
+      <ul>
+      <% @area.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :ar_type %><br>
+    <%= f.text_field :ar_type, :value => f.object.ar_type || 'artype' %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :ar_subtype %><br>
+    <%= f.text_field :ar_subtype, :value => f.object.ar_subtype || 'arsubtype' %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :feature_description_alignment %><br>
+    <%= f.text_field :feature_description_alignment, :value => f.object.feature_description_alignment || 'regular' %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :max_objects_to_detect_per_frame %><br>
+    <%= f.text_field :max_objects_to_detect_per_frame, :value => f.object.max_objects_to_detect_per_frame || 1 %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :max_objects_to_track_in_parallel %><br>
+    <%= f.text_field :max_objects_to_track_in_parallel, :value => f.object.max_objects_to_track_in_parallel || 1 %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :similarity_threshold %><br>
+    <%= f.text_field :similarity_threshold, :value => f.object.similarity_threshold || 0.7 %>
+  </div>
+
+  <div class="actions navigation">
+    <%= f.submit %>
+  </div>
+<% end %>

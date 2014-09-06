@@ -1,0 +1,28 @@
+<%= form_for [@area, @poi, @poi_data] do |f| %>
+  <% if @poi_data.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@poi_data.errors.count, "error") %> prohibited this poi_datum from being saved:</h2>
+
+      <ul>
+      <% @poi_data.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= f.hidden_field :data_type, :value => params[:poi_data_type] %>
+  
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :file %><br>
+    <%= f.file_field :file %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

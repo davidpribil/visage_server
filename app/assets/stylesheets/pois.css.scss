@@ -1,0 +1,86 @@
+// Place all the styles related to the Area controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul {
+  overflow: hidden;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.draggable { 
+  width: 100px; 
+  height: 100px; 
+  position: relative;
+}
+
+#droppable {
+  width: 100%;
+  height: 100%;
+  display: none;
+  overflow: hidden;
+}
+
+#right_menu_bar {
+  float: left;
+  width: 200px;
+  
+  ul {
+    height: 200px;
+    overflow: scroll;
+  }
+}
+
+#assets {
+}
+
+textarea {
+  resize:none;
+  //min-width: 100px;
+  //min-height: 50px;
+  width: 100%;
+  height: 100%;
+  display:block;
+  position: absolute;
+}
+
+.vdialog label, .vdialog input { display:block; }
+.vdialog label { margin-top: 0.5em; }
+.vdialog input, .vdialog textarea { width: 95%; }
+#tabs { 
+  width: 900px;
+  height:600px;
+  float: left;
+  overflow: hidden;
+}
+#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+#add_tab { cursor: pointer; }
+
+.transparent {
+  background:#7f7f7f;
+  background:rgba(255,255,255,0.5);
+  width: 42px;
+}
+
+.close-image{
+    position: absolute;
+    float: right;
+    z-index: 99999;
+    display: inline-block;
+    top: 1px; right: 1px;
+    width: 12px; height: 12px
+}
+
+.poi_data_image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.audio_dnd {
+  position: absolute;
+}
+
+

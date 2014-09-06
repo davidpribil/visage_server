@@ -1,0 +1,30 @@
+function AjaxFunctions(){
+};
+
+AjaxFunctions.updatePoiLocationPutPath = "<%= Rails.application.routes.url_helpers.poi_update_location_path(:poi_id => 0, :area_id => 0) %>";
+AjaxFunctions.getPoiListPath = "<%= Rails.application.routes.url_helpers.area_pois_path(:area_id => 0) %>";
+
+AjaxFunctions.getAreaPoiPathForIds = function(path, areaId, poiId){
+	var strings = path.split("/");
+	strings[strings.length - 4] = areaId;
+	strings[strings.length - 2] = poiId;
+	return strings.join("/");
+};
+
+AjaxFunctions.getAreaPathForId = function(path, areaId){
+	var strings = path.split("/");
+	strings[strings.length - 2] = areaId;
+	return strings.join("/");
+};
+
+AjaxFunctions.setPoiLocation = function(areaId, poiId, lat, lon){
+	$.post(AjaxFunctions.getAreaPoiPathForIds(AjaxFunctions.updatePoiLocationPutPath, areaId, poiId),
+		{ lat: lat, lon: lon }
+	);
+};
+
+AjaxFunctions.getPoiList = function(areaId, callback){
+	$.get(AjaxFunctions.getAreaPathForId(AjaxFunctions.getPoiListPath, areaId),
+		 callback
+	);
+};
