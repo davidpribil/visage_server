@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825174930) do
+ActiveRecord::Schema.define(version: 20140825101646) do
 
   create_table "ar_targets", force: true do |t|
     t.string   "name"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20140825174930) do
 
   create_table "poi_datas", force: true do |t|
     t.string   "description"
-    t.string   "scale"
     t.binary   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -74,8 +73,6 @@ ActiveRecord::Schema.define(version: 20140825174930) do
     t.boolean  "enabled",              default: false
     t.binary   "marker_image"
     t.string   "tab_data"
-    t.float    "height"
-    t.float    "width"
   end
 
   create_table "users", force: true do |t|
