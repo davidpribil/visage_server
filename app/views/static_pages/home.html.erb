@@ -3,9 +3,10 @@
 	<h1>VisAge Content Creator</h1>
 	
 	<h2>
-		Welcome to the VisAge Content Creator web application. To use the application, please sign in.
+		Welcome to the VisAge Content Creator web application.<% unless signed_in? %> To use the application, please sign in.<% end %>
 	</h2>
-	
+
+  <% unless signed_in? %>
 	<%= link_to "Sign in", signin_path, class: "btn btn-primary btn-lg", role: "button" %>
-  
+  <% end %>
 </div>
