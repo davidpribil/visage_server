@@ -17,7 +17,6 @@ and Postgre on production (for heroku)
 
 * Once the server is running, users should be added from the command line. Open it with <tt>rails console</tt>
 
-* Add a user with this command : <tt>User.create(:name=> "<username>", :email => "<mail address>", :password => "<password>",
-:password_confirmation => "<password>")</tt>
+* Add a user with this command : <tt>User.create(:name=> "<username>", :email => "<mail address>", :password => "<password>",:password_confirmation => "<password>")</tt>
 
-* On development: open <a href="localhost:3000"=>localhost:3000</a>
+* On development: open http://localhost:3000
