@@ -1,6 +1,7 @@
 class PoiDatasController < ApplicationController
   before_action :set_poi_data, only: [:show, :edit, :update, :destroy]
   before_action :set_area_poi
+  before_action :signed_in_user
 
   # GET /poi_data
   # GET /poi_data.json
@@ -57,7 +58,7 @@ class PoiDatasController < ApplicationController
   def destroy
     @poi_data.destroy
     respond_to do |format|
-      format.html { redirect_to poi_data_url, notice: 'Poi data was successfully destroyed.' }
+      format.html { redirect_to edit_area_poi_path(@area, @poi), notice: 'Poi data was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

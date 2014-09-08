@@ -1,11 +1,15 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
 	<div class="navbar-inner">
 	  <div class="container">
-		<%= link_to "VisAge", '#', id:"logo"%>
+		<%= link_to "VisAge", root_path, id:"logo"%>
 		<nav>
 			<ul class="nav navbar-nav navbar-right">
-				<li><%= link_to "Home", root_path %></li>
-				<li><%= link_to "Help", help_path %></li>
+              <% if signed_in? %>
+                  <li><%= link_to "Areas", areas_path %></li>
+                  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+              <% else %>
+                  <li><%= link_to "Sign in", signin_path %></li>
+              <% end %>
 			</ul>
 		</nav>
 	  </div>

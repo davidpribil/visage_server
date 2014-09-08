@@ -6,13 +6,14 @@ Rails.application.routes.draw do
   
   post 'areas/:area_id/pois/:poi_id/updateLocation', to: 'pois#updateLocation', as: 'poi_update_location'
 
-  root 'areas#index'
-  match '/help', to: 'static_pages#help', via: 'get'
+  root 'static_pages#home'
   match '/signup', to: 'users#new', via: 'get'
-
-  resources :ar_targets
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
 
   resources :users
+
+  resources :sessions, only: [:new, :create, :destroy]
   
   resources :areas do
     resources :pois do

@@ -72,6 +72,7 @@ module AreasHelper
                   xml.Parameters {
                     xml.KeepPoseForNumberOfFrames 2
                     xml.GravityAssistance
+                    xml.GravityAssistance
                     xml.AlphaTranslation 0.8
                     xml.GammaTranslation 0.8
                     xml.AlphaRotation 0.5

@@ -33,9 +33,15 @@
 	  </div>
 	<% end %>
 </div>
- 
-<button id="add_tab">Add new Era</button>
-<br />
+
+<% if @poi.marker_image %>
+    <button id="add_tab">Add new Era</button>
+    <br />
+<% else %>
+    <button id="set_marker">Set Locator Image</button>
+    <br />
+<% end %>
+
 
 <div id="tabs">
   <ul>
@@ -51,10 +57,6 @@
 		.css("background-size", "contain").
 		css("background-position", "center");
 		</script>
-	<% else %>
-		<button id="set_marker">
-			Set Locator Image
-		</button>
 	<% end %>
 </div>
 <div id="right_menu_bar">
@@ -72,8 +74,13 @@
 						<div class="image_dnd draggable" poi_data_id="<%= poi_data.id %>">
 							<img class="poi_data_image" src="data:image/jpg;base64,<%= Base64.strict_encode64(poi_data.file).html_safe %>">
 						</div>
-						<div><%= poi_data.description %></div>
-					</li>	
+						<div>
+                          <%= poi_data.description %>
+                          <br />
+                          <%= link_to 'Delete', area_poi_poi_data_path(@area, @poi, poi_data), :class => ["delete_button", "delete_li"] , method: :delete, data: { confirm: 'Are you sure?' } %>
+                          <br /><br />
+                        </div>
+					</li>
 				<% end %>
 			<% else %>
 					<li class="placeholder">
@@ -115,7 +122,7 @@
 <%= render 'form'%>
 
 <%= link_to 'Back', @area, :class => "navigation" %>
-<%= link_to 'Delete POI', area_poi_path(@area, @poi), :class => "delete_button" , method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Delete POI', area_poi_path(@area, @poi), :class => ["delete_button", "delete_poi"] , method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <!-- Add pre-defined tabs and elements -->
 <script>

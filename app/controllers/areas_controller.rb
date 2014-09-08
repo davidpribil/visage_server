@@ -1,5 +1,6 @@
 class AreasController < ApplicationController
   before_action :set_area, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user
 
   # GET /areas
   # GET /areas.json

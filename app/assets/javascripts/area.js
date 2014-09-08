@@ -9,6 +9,9 @@ AreaMap.creating = false;
 
 AreaMap.load_map = function() {
 	console.log("load called");
+
+    var link = $('#edit_poi_link');
+    link.hide();
 	
 	$("#selectable").selectable({
 		stop : function() {
@@ -20,6 +23,7 @@ AreaMap.load_map = function() {
 				result.append(" #" + (index + 1 ));
 				result.attr("data-visage-edit-poi", index);
 				var link = $('#edit_poi_link');
+                link.show();
 				var strings = link.attr('data-visage-edit-poi-link').split("/");
 				strings[strings.length - 2] = poi_id;
 				link.attr("href", strings.join("/"));

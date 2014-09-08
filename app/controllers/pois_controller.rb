@@ -1,6 +1,7 @@
 class PoisController < ApplicationController
   before_action :set_poi, only: [:show, :edit, :update, :destroy]  
   before_action :set_area
+  before_action :signed_in_user
   
   def new
     @poi = @area.pois.new
@@ -36,7 +37,10 @@ class PoisController < ApplicationController
         extra.each do |e|
           hash = e[1]
           position_params = {position: [hash['x'], hash['y'], 0],
-            scale: [hash['w'], hash['h'], 0], source: hash['source'], tab_id: hash['tab_id']}
+                             scale: [hash['w'], hash['h'], 0],
+                             rotation: [0,0,0],
+                             source: hash['source'],
+                             tab_id: hash['tab_id']}
           poi_data_id = hash['poi_data_id']
           poi_data_location_id = hash['poi_data_location_id']
           if PoiDataLocation.exists? poi_data_location_id
