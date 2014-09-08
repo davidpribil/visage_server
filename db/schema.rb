@@ -13,15 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140908043453) do
 
-  create_table "ar_targets", force: true do |t|
-    t.string   "name"
-    t.string   "image_url"
-    t.string   "data_url"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "areas", force: true do |t|
     t.string   "name"
     t.string   "ar_type"
