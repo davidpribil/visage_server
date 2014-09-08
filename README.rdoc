@@ -1,28 +1,23 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the VisAge content creation application that was written for my master's thesis.
 
-Things you may want to cover:
+Usage:
 
-* Ruby version
+* Check out the code
 
-* System dependencies
+* Set up the development and production databases in <tt>conf/database.yml</tt>. The default is: sqlite on Development
+and Postgre on production (for heroku)
 
-* Configuration
+* Execute <tt>bundle install</tt>
 
-* Database creation
+* Execute <tt>rake db:migrate</tt>
 
-* Database initialization
+* Run the server with <tt>rails s</tt>
 
-* How to run the test suite
+* Once the server is running, users should be added from the command line. Open it with <tt>rails console</tt>
 
-* Services (job queues, cache servers, search engines, etc.)
+* Add a user with this command : <tt>User.create(:name=> "<username>", :email => "<mail address>", :password => "<password>",
+:password_confirmation => "<password>")</tt>
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* On development: open <a href="localhost:3000"=>localhost:3000</a>
