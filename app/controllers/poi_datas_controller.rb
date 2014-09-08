@@ -34,7 +34,8 @@ class PoiDatasController < ApplicationController
     
     respond_to do |format|
       if @poi_data.save
-        format.html { redirect_to edit_area_poi_path(@area, @poi), notice: 'Poi data was successfully created.' }
+        flash[:success] = 'Poi data was successfully created.'
+        format.html { redirect_to edit_area_poi_path(@area, @poi) }
       else
         format.html { render :new }
       end
@@ -46,7 +47,8 @@ class PoiDatasController < ApplicationController
   def update
     respond_to do |format|
       if @poi_data.update(poi_data_params)
-        format.html { redirect_to @poi_data, notice: 'Poi data was successfully updated.' }
+        flash[:success] = 'Poi data was successfully updated.'
+        format.html { redirect_to @poi_data }
       else
         format.html { render :edit }
       end
@@ -58,7 +60,8 @@ class PoiDatasController < ApplicationController
   def destroy
     @poi_data.destroy
     respond_to do |format|
-      format.html { redirect_to edit_area_poi_path(@area, @poi), notice: 'Poi data was successfully destroyed.' }
+      flash[:success] = 'Poi data was successfully deleted.'
+      format.html { redirect_to edit_area_poi_path(@area, @poi) }
       format.json { head :no_content }
     end
   end

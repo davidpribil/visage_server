@@ -6,8 +6,7 @@ Usage:
 
 * Check out the code
 
-* Set up the development and production databases in <tt>conf/database.yml</tt>. The default is: sqlite on Development
-and Postgre on production (for heroku)
+* Set up the development and production databases in <tt>conf/database.yml</tt>. The default is: sqlite on Development and Postgre on production (for heroku)
 
 * Execute <tt>bundle install</tt>
 

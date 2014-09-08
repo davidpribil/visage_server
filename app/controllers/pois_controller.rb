@@ -17,7 +17,8 @@ class PoisController < ApplicationController
         
     respond_to do |format|
       if @poi.save
-        format.html {redirect_to @area, notice: 'Poi was successfully created.'}
+        flash[:success] = 'Poi was successfully created.'
+        format.html {redirect_to @area}
       else
         format.html {render :new}
       end
@@ -66,7 +67,8 @@ class PoisController < ApplicationController
         poi_params[:marker_image] = data.read;
       end
       if @poi.update(poi_params)
-        format.html { redirect_to edit_area_poi_path(@area, @poi), notice: 'Poi was successfully updated.' }
+        flash[:success] = 'Poi was successfully updated.'
+        format.html { redirect_to edit_area_poi_path(@area, @poi)}
       else
         format.html { render :edit }
       end
@@ -87,7 +89,8 @@ class PoisController < ApplicationController
   def destroy
     @poi.destroy
     respond_to do |format|
-      format.html { redirect_to @area, notice: 'Poi was successfully destroyed.' }
+      flash[:success] = 'Poi was successfully deleted.'
+      format.html { redirect_to @area}
     end
   end
   
