@@ -10,7 +10,7 @@ module AreasHelper
           areas.each do |area|
             xml.Area {
               xml.Name(area.name)
-              xml.ZipFileUrl("http://mysterious-hollows-7327.herokuapp.com/api/areas/#{area.id}")
+              xml.ZipFileUrl("http://visage-server.herokuapp.com/api/areas/#{area.id}")
             }
           end
         }
