@@ -89,6 +89,8 @@ $(function() {
 			Add : function() {
 				addTab();
 				$(this).dialog("close");
+                // submit info to the server
+                $('#form_submission_button').click();
 			},
 			Cancel : function() {
 				$(this).dialog("close");
@@ -108,13 +110,15 @@ $(function() {
 			},
 			Cancel : function() {
 				$(this).dialog("close");
+                window.history.back();
 			}
 		},
 		close : function() {
 			form[0].reset();
-		}
+            window.history.back();
+        }
 	});
-	
+
 	// addTab form: calls addTab function on submit and closes the dialog
 	var form = dialog.find("form").submit(function(event) {
 		addTab();
@@ -297,11 +301,11 @@ $(function() {
 	$("#add_tab").button().click(function() {
 		dialog.dialog("open");
 	});
-	
+
 	$("#set_marker").button().click(function(){
 		marker_dialog.dialog("open");
 	});
-	
+
 	removeTab = function(tabId){
 		$("#" + tabId).remove();
 		var id = tabId.substring(5);

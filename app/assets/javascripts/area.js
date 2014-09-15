@@ -63,10 +63,11 @@ AreaMap.load_map = function() {
 		provider : {},
 		internal : {
 			id : 'map'
-		},
+		}
 	}, function() {
 
 		AreaMap.map = handler.getMap();
+        AreaMap.handleNoGeolocation
 		
 		var input = (document.getElementById('pac-input'));
 	    AreaMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);

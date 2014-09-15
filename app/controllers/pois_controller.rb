@@ -67,6 +67,7 @@ class PoisController < ApplicationController
         poi_params[:marker_image] = data.read;
       end
       if @poi.update(poi_params)
+        @area.touch
         flash[:success] = 'Poi was successfully updated.'
         format.html { redirect_to edit_area_poi_path(@area, @poi)}
       else
@@ -83,6 +84,7 @@ class PoisController < ApplicationController
     poi.gps_latitude = params[:lat]
     poi.gps_longitude = params[:lon]
     poi.save
+    @area.touch
     render nothing: true
   end
   

@@ -20,16 +20,16 @@
   </div>
   
   <div class="field">
-    <%= f.label :target_height %><br>
+    <%= f.label 'Height in metres' %><br>
     <%= f.text_field :target_height %>
   </div>
   
   <div class="field">
-    <%= f.label :target_width %><br>
+    <%= f.label 'Width in metres' %><br>
     <%= f.text_field :target_width %>
   </div>
 
   <div class="actions navigation">
-    <%= f.submit %>
+    <%= f.submit poi_action_name + ' POI', :id => 'form_submission_button'%>
   </div>
 <% end %>

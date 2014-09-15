@@ -12,8 +12,10 @@
 	    <% @areas.each do |area| %>
 	      <tr>
 	      	<td><%= area.name %></td>
-	        <td><%= link_to 'Show', area,:class => "navigation" %></td>
-	        <td><%= link_to 'Edit', edit_area_path(area),:class => "navigation" %></td>
+	        <td><%= link_to 'Edit', area,:class => "navigation" %></td>
+	        <td><%= link_to 'Configure', edit_area_path(area),:class => "navigation" %></td>
+            <td>Number of POI's:<%= area.pois.length %></td>
+            <td>Last edited: <%= area.updated_at.strftime '%F, %H:%M' %></td>
 	        <td class="tddel"><%= link_to 'Delete', area, method: :delete, data: { confirm: 'Are you sure?' }, :class => ["delete_button", "delete_area"] %></td>
 	      </tr>
 	    <% end %>

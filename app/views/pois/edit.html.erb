@@ -1,15 +1,15 @@
-<h1>Editing poi</h1>
+<h1>Editing POI</h1>
 
 <div id="dialog_new_era" class="vdialog" title="New Era">
   <form>
     <fieldset class="ui-helper-reset">
       <label for="tab_title">Year</label>
-      <input type="text" name="tab_title" id="tab_title" value="Year" class="ui-widget-content ui-corner-all">
+      <input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all">
     </fieldset>
   </form>
 </div>
 
-<div id="dialog_set_marker" class="vdialog" title="Set marker image">
+<div id="dialog_set_marker" class="vdialog" title="Set locator image">
   <%= form_for [@area, @poi] do |f| %>
 	  <% if @poi.errors.any? %>
 	    <div id="error_explanation">
@@ -60,9 +60,9 @@
 	<% end %>
 </div>
 <div id="right_menu_bar">
-	<%= link_to "Upload image", new_area_poi_poi_data_path(@area, @poi, :poi_data_type => "texture2D"), {:method => "get"} %>
+	<%= link_to "Upload image", new_area_poi_poi_data_path(@area, @poi, :poi_data_type => "texture2D", :poi_data_type_label => "Image"), {:method => "get"} %>
 	<br />
-	<%= link_to "Upload audio", new_area_poi_poi_data_path(@area, @poi, :poi_data_type => "audio"), {:method => "get"} %>
+	<%= link_to "Upload audio", new_area_poi_poi_data_path(@area, @poi, :poi_data_type => "audio", :poi_data_type_label => "Audio"), {:method => "get"} %>
 
 	<div id="assets">
 		<h2><a href="#">Images</a></h2>
@@ -119,7 +119,7 @@
 
 <div style="clear:both;"></div>
 
-<%= render 'form'%>
+<%= render 'form', :poi_action_name => 'Update' %>
 
 <%= link_to 'Back', @area, :class => "navigation" %>
 <%= link_to 'Delete POI', area_poi_path(@area, @poi), :class => ["delete_button", "delete_poi"] , method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -152,6 +152,11 @@ ready = function() {
 			pos[0],pos[1],scale[0],scale[1], <%= d.id%>, <%= d.tab_id %>, "<%= d.source %>");
 		<% end %>
 	<% end %>
+
+    <% unless @poi.marker_image %>
+    // open dialog automatically if there is no marker image
+    $("#set_marker").click();
+    <% end %>
 }
 
 $(document).ready(ready);

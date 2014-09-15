@@ -15,6 +15,18 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+    <br />
+
+    <div class="actions navigation">
+      <%= f.submit %>
+    </div>
+
+    <br /> <br /> <br />
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Image tracking settings</div>
+      <div class="panel-body">
+
   
   <div class="field">
     <%= f.label :ar_type %><br>
@@ -46,7 +58,8 @@
     <%= f.text_field :similarity_threshold, :value => f.object.similarity_threshold || 0.7 %>
   </div>
 
-  <div class="actions navigation">
-    <%= f.submit %>
-  </div>
+      </div>
+    </div>
+
+
 <% end %>
