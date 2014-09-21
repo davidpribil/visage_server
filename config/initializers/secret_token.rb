@@ -1,0 +1,1 @@
+RailsTest::Application.config.secret_key_base = '1b46deaa233a7c66d64d66efbf9e50e3260691f8c8c3963c14ad626b177ae45f74eb0213a8233df8b3a3d336ff6a7a0591edaffa8bf7b419cba0cf1d5d428305'
